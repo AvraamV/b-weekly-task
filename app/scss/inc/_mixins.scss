@@ -1,0 +1,91 @@
+//vars
+$mark: #1888FF;
+$text: #1C2737;
+$text2: #537599;
+//mixins
+$maxWidth: 1920;
+$mobWidth: 750;
+$rootFontSize: 16;
+
+//convert px to rem
+@function rem($value) {
+	$remValue: ($value / 16) + rem;
+	@return $remValue;
+}
+
+//convert px to em
+@function em($value, $const: $rootFontSize) {
+	$emValue: ($value / $const) + em;
+	@return $emValue;
+}
+
+//convert px to percent
+@function percent($value, $const) {
+	$percent: '%';
+	$percentValue: ($value / $const * 100)#{$percent};
+	@return $percentValue;
+}
+
+//convert px to vw
+@function vw($value) {
+	$vwValue: ($value / $maxWidth * 100) + vw;
+	@return $vwValue;
+}
+
+//convert px to vw for mobile
+@function vwm($value) {
+	$vwValue: ($value / $mobWidth * 100) + vw;
+	@return $vwValue;
+}
+
+//hidden scrollbar
+@mixin no-scrollbar{
+	&::-webkit-scrollbar { width: 0; }
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	overflow: -moz-scrollbars-none;
+}
+
+//custom scrollbar styes
+@mixin custom-scrollbar{
+  scrollbar-width: thin;
+  scrollbar-color:  #333 #E6E6E6;
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #CFCFCF;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #000;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #000;
+  }
+}
+
+//add default styles for before and after
+@mixin bf-af{
+	position: absolute;
+	content: "";
+}
+
+//add background styles
+@mixin bg-set($bg_size,$pos: center){
+	background-size: $bg_size;
+	background-position: $pos;
+	background-repeat: no-repeat;
+}
+
+//media queries
+@mixin mq-mob {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin mq-mob-inv{
+  @media screen and (min-width: 1025px) {
+    @content;
+  }
+}
